@@ -1,3 +1,11 @@
+def ft_len(num):
+    a = 0
+    while num > 0:
+        a += 1
+        num //= 10
+    return a
+
+
 def ft_bin_num(number):
     bin = 1
     if number < 0:
@@ -18,32 +26,25 @@ def ft_rev_num(number):
     return r
 
 
-def ft_pow(number, stepen):
-    result = 1
-    stepen2 = 0
-    while stepen2 < stepen:
-        stepen2 += 1
-        result *= number
-    return result
-
-
 def ft_straight_code(number):
     sign = 0
-    pcbin = 0
+    pcbin = ""
+    bin = 0
     if -128 <= number <= 127:
         if number == -128:
-            print("10000000")
-        if number >= 0:
-            sign = 0
+            return ("10000000")
         else:
-            sign = 1
-        pcbin = (ft_bin_num(number) + ft_pow(10, 8)) + sign * ft_pow(10, 7)
-        print(pcbin)
+            if number >= 0:
+                sign = 0
+            else:
+                sign = 1
+            bin = ft_bin_num(number)
+            lengbin = ft_len(bin)
+            return (str(sign) + ("0" * (7 - lengbin)) + str(bin))
     else:
-        print("invalyd number")
+        return ("invalyd number")
 
 
-print(ft_straight_code(-128))
 
 
 

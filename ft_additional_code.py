@@ -1,4 +1,36 @@
-import ft_reverse_code as ft
+import ft_reverse_code as rev
+
+
+def ft_len_str(num):
+    a = 0
+    for c in num:
+        a += 1
+    return a
+
+
+def ft_rev_num(number):
+    r = 0
+    if number > 0:
+        while number > 0:
+            r = (r * 10) + (number % 10)
+            number = number // 10
+        return r
+    else:
+        number *= -1
+        while number > 0:
+            r = (r * 10) + (number % 10)
+            number = number // 10
+        return -r
+
+
+def ft_bin_num(number):
+    bin = 1
+    while number > 0:
+        bin = (bin * 10) + (number % 2)
+        number //= 2
+    bin = ft_rev_num(bin)
+    bin //= 10
+    return bin
 
 
 def ft_pow(number, stepen):
@@ -10,45 +42,32 @@ def ft_pow(number, stepen):
     return result
 
 
-def ft_rev_num(number):
-    r = 0
+def ft_rev_bin_num(number):
+    dec = 0
+    stepen = -1
     while number > 0:
-        r = (r * 10) + (number % 10)
-        number = number // 10
-    return r
-
-
-def ft_len(str):
-    length = 0
-    while str > 0:
-        length += 1
-        str //= 10
-    return length
+        stepen += 1
+        dec = dec + (number % 10) * ft_pow(2, stepen)
+        number //= 10
+    return dec
 
 
 def ft_additional_code(number):
-    revbin = ft.ft_reverse_code(number)
-    addbin = 1
-    lengthaddbin = 0
+    revcode = rev.ft_reverse_code(number)
+    addcode = revcode[0]
     if -128 <= number <= 127:
         if number == -128:
-            return 100000000
-        if number >= 0:
-            return revbin
+            return ("10000000")
         else:
-            while revbin > 11:
-                if revbin % 10 + 1 >= 2:
-                    addbin = addbin * 10 + 0
-                    revbin //= 10
-                else:
-                    addbin = addbin * 10 + 1
-                    break
-        revbin = ft.ft_reverse_code(number)
-        addbin = ft_rev_num(addbin)
-        lengthaddbin = ft_len(addbin)
-        addbin = (revbin // ft_pow(10, lengthaddbin - 1)) * (ft_pow(10, lengthaddbin - 1)) + addbin // 10
-        return addbin
+            tenss = ft_rev_bin_num(int(revcode)) + 1
+            twoss = ft_bin_num(tenss)
+        return twoss
     else:
         return ("invalyd number")
+
+
+
+
+
 
 
