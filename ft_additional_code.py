@@ -1,4 +1,5 @@
 import ft_reverse_code as rev
+import ft_straight_code as straight
 
 
 def ft_len_str(num):
@@ -55,9 +56,12 @@ def ft_rev_bin_num(number):
 def ft_additional_code(number):
     revcode = rev.ft_reverse_code(number)
     addcode = revcode[0]
+    pcbin = straight.ft_straight_code(number)
     if -128 <= number <= 127:
         if number == -128:
             return ("10000000")
+        if number >= 0:
+            return pcbin
         else:
             tenss = ft_rev_bin_num(int(revcode)) + 1
             twoss = ft_bin_num(tenss)
